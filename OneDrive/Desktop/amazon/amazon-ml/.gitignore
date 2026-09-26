@@ -1,0 +1,19 @@
+# ---- data & generated artefacts (never commit competition data) ----
+data/
+student_resource/dataset/
+output/*.tsv
+*.parquet
+*.zip
+*.npy
+*.pkl
+# model binaries (small LightGBM text models live in data/models, which is ignored anyway)
+*.bin
+models/
+# ---- environment / caches ----
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+# large reports (missed-pair dumps on full data)
+reports/*.tsv

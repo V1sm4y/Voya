@@ -1,0 +1,5 @@
+geo train_source1: 2,206,821 rows | state parsed 100.0% + inferred 0.0% | unknown 0.0% | city 98.4%
+geo train_source2: 5,034,616 rows | state parsed 96.5% + inferred 0.0% | unknown 3.5% | city 94.0%
+geo train_source3: 5,285,603 rows | state parsed 96.6% + inferred 0.0% | unknown 3.4% | city 94.8%
+geo test_source1: 1,732,544 rows | state parsed 100.0% + inferred 0.0% | unknown 0.0% | city 98.9%
+geo test_source2: 4,887,273 rows | state parsed 92.5% + inferred 4.6% | unknown 2.9% | city 95.0%
