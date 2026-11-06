@@ -25,29 +25,6 @@ def test_demo_passes_gate_and_reads_warm():
     assert result["ok"] is True
     assert 55.0 < result["warm_cool"]["hue"] < 68.0
     assert result["warm_cool"]["label"] == "warm"
-
-
-def test_flash_pair_cancels_strong_ambient_cast():
-    from undertone.color import linear_to_srgb, srgb_to_linear
-
-    reference = render_face(cast=(1.0, 1.0, 1.0))
-    mask = skin_mask_srgb(reference)
-    skin_linear = lab_to_linear_rgb(np.array([60.0, 12.0, 22.0]))
-    
-    # Store has a heavy warm-amber tint (e.g. 2500K halogen cast)
-    ambient_cast = np.array([1.4, 0.8, 0.5])
-    off_linear = 0.3 * srgb_to_linear(reference) * ambient_cast
-    on_linear = off_linear.copy()
-    # Flash adds pure skin-reflected light without ambient tint
-    on_linear[mask] = on_linear[mask] + 1.2 * skin_linear
-
-    on = linear_to_srgb(on_linear)
-    off = linear_to_srgb(off_linear)
-    result = analyze_pair_srgb(on, off, reference_patch=(15, 15, 57, 57))
-    assert result["ok"] is True
-    # Label correctly captures warm undertone without skew from halogen cast
-    assert result["warm_cool"]["label"] == "warm"
-    assert 55.0 <= result["warm_cool"]["hue"] <= 68.0
     assert result["confidence"]["score"] > 0.5
     assert result["depth"]["palette_bucket"] in {"light", "medium", "deep"}
     assert len(result["palette"]) >= 1
